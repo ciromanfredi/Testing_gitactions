@@ -32,7 +32,7 @@ android-test:
 
     - run:
         name: create AVD
-        command: make create-avd
+        command: avdmanager create avd –device “10.1in WXGA (Tablet)” –name android-tablet -k “system-images;android-29;google_apis;x86_64” –force
 
     - run:
         name: start AVD
@@ -49,6 +49,3 @@ android-test:
 
     - store_artifacts:
         path: screenshots
-
-    create-avd:
-      avdmanager create avd –device “10.1in WXGA (Tablet)” –name android-tablet -k “system-images;android-29;google_apis;x86_64” –force
