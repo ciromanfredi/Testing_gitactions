@@ -1,6 +1,6 @@
 android-test:
   macos:
-    xcode: "11.2.0"
+    xcode: "11.2.1"
   working_directory: ~/repo/App
   steps:
     - checkout:
