@@ -1,8 +1,9 @@
-android-test:
-  macos:
-    xcode: "11.2.0"
-  working_directory: ~/repo/App
-  jobs:
+version: 2.1
+jobs: # a basic unit of work in a run
+  build: # runs not using `Workflows` must have a `build` job as entry point
+    macos:  # indicate that we are using the macOS executor
+      xcode: 11.3.0 # indicate our selected version of Xcode
+    working_directory: ~/repo/App
     steps:
       - checkout:
           path: ~/repo
