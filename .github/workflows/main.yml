@@ -24,7 +24,7 @@ jobs:
           echo ciro
           pwd
           ls
-          cd /Users/runner/runners/2.165.2/work/Testing/Testing
+          cd /Users/runner/runners/2.165.2/work/Testing/Testing/app
           ls
           pwd
 
