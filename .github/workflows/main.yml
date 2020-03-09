@@ -18,34 +18,26 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
-
-    - name: Run a multi-line script
-      run: |
-        echo ciro
-        pwd
-        ls
-        cd app
-        cd FunesDroid-master
-        ls
-        pwd
-
-    - name: Installo Python.
+    - name: Installo Python
       uses: actions/setup-python@v1
       with:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-    - name: Eseguo FunesDroid
-      run: |
-        cd app/FunesDroid-master
-        python launchexp.py
+#    - name: Eseguo FunesDroid
+#      run: |
+#        cd app/FunesDroid-master
+#        python launchexp.py
 
-#    - name: Run emulator + test
-#      uses: reactivecircus/android-emulator-runner@v2
-#      with:
-#        api-level: 29
-#        script: |
-#          echo "ciro"
-#          echo "ciro2"
-#          chmod +x gradlew
-#          ./gradlew connectedCheck
+    - name: Run emulator + test
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: |
+          echo "ciro"
+          echo "ciro2"
+          cd app/FunesDroid-master
+          python launchexp.py
+        # chmod +x gradlew
+        # ./gradlew connectedCheck
+
