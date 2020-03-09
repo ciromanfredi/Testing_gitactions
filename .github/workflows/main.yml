@@ -25,15 +25,20 @@ jobs:
         pwd
         ls
         cd app
+        cd FunesDroid-master
         ls
         pwd
-#    - name: Installo Python.
-#      uses: actions/setup-python@v1
-#      with:
-#        python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-#        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-#    - run: python -c "import sys; print(sys.version)"
-#
+
+    - name: Installo Python.
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+    - name: Eseguo FunesDroid
+      run: |
+        python launchexp.py
+
 #    - name: Run emulator + test
 #      uses: reactivecircus/android-emulator-runner@v2
 #      with:
