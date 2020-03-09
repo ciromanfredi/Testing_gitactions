@@ -26,16 +26,25 @@ jobs:
 
     - name: espoloro...
       run: |
+        pwd
         ls
         cd ..
         echo "cieoo"
+        pwd
         ls
         cd ..
         echo "cieoo"
+        pwd
         ls
         cd ..
         echo "cieoo"
+        pwd
         ls
+        echo "cieoo"
+        cd bin
+        pwd
+        ls
+
 
     - name: Installo Python
       uses: actions/setup-python@v1
