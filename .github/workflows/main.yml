@@ -37,6 +37,8 @@ jobs:
 
     - name: Eseguo FunesDroid
       run: |
+        pwd
+        ls
         python launchexp.py
 
 #    - name: Run emulator + test
