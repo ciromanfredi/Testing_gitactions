@@ -33,7 +33,9 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
-        script: app/.github/scripts/funesdroid.sh
+        script: |
+          ls
+          .github/scripts/funesdroid.sh
 
         # chmod +x gradlew
         # ./gradlew connectedCheck
