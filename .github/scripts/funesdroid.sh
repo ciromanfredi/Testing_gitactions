@@ -7,6 +7,7 @@
 # Extracted from https://github.com/facebook/react-native/blob/master/scripts/android-setup.sh
 
 echo "Eseguo script funesDroid..."
+chmod u+x ./gradlew
 ./gradlew assembleDebug
 pwd
 ls
