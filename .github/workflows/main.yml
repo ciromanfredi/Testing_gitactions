@@ -38,10 +38,10 @@ jobs:
           echo "ciro2"
           ls
           pwd
-          cd app
+          cd app/
           ls
           pwd
-          cd FunesDroid-master
+          cd FunesDroid-master/
           ls
           pwd
           python launchexp.py
