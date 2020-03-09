@@ -14,9 +14,10 @@ jobs:
   test:
     runs-on: macos
     steps:
-      -name: esploro
-       run: |
-         echo ciro
+    -name: esploro
+     run: |
+      echo ciro
+       psd
 #    - name: checkout
 #      uses: actions/checkout@v2
 #
