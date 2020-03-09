@@ -35,8 +35,8 @@ jobs:
         api-level: 29
         script: |
           ls
+          chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
-
         # chmod +x gradlew
         # ./gradlew connectedCheck
 
