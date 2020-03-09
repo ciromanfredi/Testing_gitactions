@@ -24,12 +24,7 @@ jobs:
           echo ciro
           pwd
           ls
-          cd ..
-          ls
-          pwd
-          cd ..
-          ls
-          cd Testing/Testing
+          cd Testing
           ls
           pwd
 
