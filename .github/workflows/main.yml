@@ -29,6 +29,9 @@ jobs:
           pwd
           cd ..
           ls
+          cd Testing/Testing
+          ls
+          pwd
 
 #    - name: checkout
 #      uses: actions/checkout@v2
