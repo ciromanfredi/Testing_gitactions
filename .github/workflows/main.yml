@@ -34,16 +34,6 @@ jobs:
       with:
         api-level: 29
         script: |
-          echo "ciro"
-          echo "ciro2"
-          ls
-          pwd
-          cd app/
-          ls
-          pwd
-          cd FunesDroid-master/
-          ls
-          pwd
           python app/FunesDroid-master/launchexp.py
         # chmod +x gradlew
         # ./gradlew connectedCheck
