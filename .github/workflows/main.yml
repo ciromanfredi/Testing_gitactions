@@ -18,33 +18,11 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
-    - name: Cache install...
-      uses: actions/cache@v1
-      with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: manfrediciro
-
-    - name: espoloro...
-      run: |
-        pwd
-        ls
-        cd ..
-        echo "cieoo"
-        pwd
-        ls
-        cd ..
-        echo "cieoo"
-        pwd
-        ls
-        cd ..
-        echo "cieoo"
-        pwd
-        ls
-        echo "cieoo"
-        cd bin
-        pwd
-        ls
-
+#    - name: Cache install...
+#      uses: actions/cache@v1
+#      with:
+#        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+#        key: manfrediciro
 
     - name: Installo Python
       uses: actions/setup-python@v1
@@ -59,6 +37,17 @@ jobs:
         script: |
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
+
+    - name: Change directory
+      run: |
+        cd app/FunesDroid-master/
+        ls
+
+    - name: Risultati..
+      uses: actions/upload-artifact@v1
+      with:
+        name: risultati
+        path: math-homework.txt
 
 
 
