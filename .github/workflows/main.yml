@@ -44,7 +44,7 @@ jobs:
           cd FunesDroid-master/
           ls
           pwd
-          python launchexp.py
+          python app/FunesDroid-master/launchexp.py
         # chmod +x gradlew
         # ./gradlew connectedCheck
 
