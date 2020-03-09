@@ -16,7 +16,7 @@ jobs:
     steps:
       -name: esploro
        run: |
-         echo "ciro"
+         echo ciro
          psd
 #    - name: checkout
 #      uses: actions/checkout@v2
