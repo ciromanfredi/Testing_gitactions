@@ -24,22 +24,24 @@ jobs:
         path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
         key: manfrediciro
 
-
-#    - name: Esploro
-#      run: |
-#        chmod u+x .github/scripts/funesdroid.sh
-#        .github/scripts/funesdroid.sh
+    - name: espoloro...
+      run: |
+        ls
+        cd ..
+        echo "cieoo"
+        ls
+        cd ..
+        echo "cieoo"
+        ls
+        cd ..
+        echo "cieoo"
+        ls
 
     - name: Installo Python
       uses: actions/setup-python@v1
       with:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-
-#    - name: Eseguo FunesDroid
-#      run: |
-#        cd app/FunesDroid-master
-#        python launchexp.py
 
     - name: Run emulator + funesDroid
       uses: reactivecircus/android-emulator-runner@v2
