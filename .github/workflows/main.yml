@@ -38,16 +38,14 @@ jobs:
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
-    - name: Change directory
-      run: |
-        cd app/FunesDroid-master/
-        ls
+    - name: Creo archivio zip
+      run: zip -r risultati.zip app/FunesDroid-master/Results
 
     - name: Risultati..
       uses: actions/upload-artifact@v1
       with:
         name: risultati
-        path: math-homework.txt
+        path: risultati.zip
 
 
 
