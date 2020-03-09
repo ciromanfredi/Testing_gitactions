@@ -38,7 +38,12 @@ jobs:
           echo "ciro2"
           ls
           pwd
-          cd app/FunesDroid-master
+          cd app
+          ls
+          pwd
+          cd FunesDroid-master
+          ls
+          pwd
           python launchexp.py
         # chmod +x gradlew
         # ./gradlew connectedCheck
