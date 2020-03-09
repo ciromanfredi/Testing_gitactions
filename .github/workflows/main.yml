@@ -23,6 +23,12 @@ jobs:
         run: |
           echo ciro
           pwd
+          ls
+          cd ..
+          ls
+          pwd
+          cd ..
+          ls
 
 #    - name: checkout
 #      uses: actions/checkout@v2
