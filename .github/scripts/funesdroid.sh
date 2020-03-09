@@ -7,6 +7,6 @@
 # Extracted from https://github.com/facebook/react-native/blob/master/scripts/android-setup.sh
 
 echo "Eseguo script funesDroid..."
-mv app/build/outputs/apk/debug/app-debug.apk app/FunesDroid-master/InputAPKs
+mv app/build/outputs/apk/debug/app-debug.apk app/FunesDroid-master/InputAPKs/app-debug.apk
 cd app/FunesDroid-master/
 python launchexp.py
