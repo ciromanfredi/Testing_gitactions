@@ -36,9 +36,9 @@ jobs:
         script: |
           echo "ciro"
           echo "ciro2"
-          cd app/FunesDroid-master
           ls
           pwd
+          cd app/FunesDroid-master
           python launchexp.py
         # chmod +x gradlew
         # ./gradlew connectedCheck
