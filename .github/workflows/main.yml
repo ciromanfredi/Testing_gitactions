@@ -18,8 +18,8 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
-    -name: Esploro
-     run: |
+    - name: Esploro
+      run: |
         chmod u+x .github/scripts/funesdroid.sh
         .github/scripts/funesdroid.sh
 
