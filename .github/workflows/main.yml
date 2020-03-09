@@ -24,7 +24,7 @@ jobs:
           echo ciro
           pwd
           ls
-          cd Testing
+          cd app
           ls
           pwd
 
