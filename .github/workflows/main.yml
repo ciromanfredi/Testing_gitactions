@@ -38,14 +38,14 @@ jobs:
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
-    - name: Creo archivio zip
-      run: zip -r risultati.zip app/FunesDroid-master/Results
+#    - name: Creo archivio zip
+#      run: zip -r risultati.zip app/FunesDroid-master/Results
 
     - name: Risultati..
       uses: actions/upload-artifact@v1
       with:
         name: risultati
-        path: risultati.zip
+        path: app/FunesDroid-master/Results
 
 
 
