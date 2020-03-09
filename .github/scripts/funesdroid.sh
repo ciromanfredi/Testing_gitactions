@@ -7,13 +7,5 @@
 # Extracted from https://github.com/facebook/react-native/blob/master/scripts/android-setup.sh
 
 echo "Eseguo script funesDroid..."
-
-ls
-pwd
-cd app/
-ls
-pwd
-cd FunesDroid-master/
-ls
-pwd
+cd app/FunesDroid-master/
 python launchexp.py
