@@ -29,14 +29,17 @@ jobs:
 #        cd app/FunesDroid-master
 #        python launchexp.py
 
-    - name: Run emulator + test
+    - name: Run emulator + funesDroid
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
         script: |
-          ls
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
-        # chmod +x gradlew
-        # ./gradlew connectedCheck
+
+#    -name: FunesDroid
+#     run: |
+#       chmod u+x .github/scripts/funesdroid.sh
+#       .github/scripts/funesdroid.sh
+
 

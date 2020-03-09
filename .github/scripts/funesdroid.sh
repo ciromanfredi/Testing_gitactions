@@ -8,4 +8,5 @@
 
 echo "Eseguo script funesDroid..."
 cd app/FunesDroid-master/
+mv app/build/outputs/apk/debug/app-debug.apk app/FunesDroid-master/InputAPKs
 python launchexp.py
