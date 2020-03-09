@@ -22,7 +22,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo ciro
-          psd
+          pwd
 
 #    - name: checkout
 #      uses: actions/checkout@v2
