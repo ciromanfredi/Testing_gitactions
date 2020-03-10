@@ -32,7 +32,8 @@ jobs:
 
     - name: exp
       run: |
-        echo ${ANDROID_HOME}
+        cd ${ANDROID_HOME}/build-tools
+        ls
         cd ..
         pwd
         ls
