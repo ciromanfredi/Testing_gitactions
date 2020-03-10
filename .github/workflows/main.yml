@@ -42,9 +42,12 @@ jobs:
           .github/scripts/funesdroid.sh
 
     - name: creo cartella per risultati Instrumented Test
-      run: cp -R app/build/reports/androidTests/connected app/build/outputs/androidTest-results/connected
+      run: |
+        mkdir -p risultatiIstruInstrumentedTest
+        cp -R app/build/reports/androidTests/connected/ risultatiIstruInstrumentedTest/reports
+        cp -R app/build/outputs/androidTest-results/connected/ risultatiIstruInstrumentedTest/outputs
 
-    - name: Risultati FunesDroid
+- name: Risultati FunesDroid
       uses: actions/upload-artifact@v1
       with:
         name: Risultati FunesDroid
@@ -54,7 +57,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Risultati Instrumented Test
-        path: app/build/outputs/androidTest-results/connected
+        path: risultatiIstruInstrumentedTest
 
 
 
