@@ -41,5 +41,5 @@ jobs:
     - name: Risultati
       uses: actions/upload-artifact@v1
       with:
-        name: risultati
+        name: Risultati
         path: app/FunesDroid-master/Results
