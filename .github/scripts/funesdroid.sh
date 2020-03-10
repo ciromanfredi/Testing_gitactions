@@ -9,7 +9,7 @@
 echo "Eseguo script funesDroid..."
 chmod u+x ./gradlew
 ./gradlew assembleDebug
-mkdir -p app/FunesDroid-master/InputAPKs
-mv app/build/outputs/apk/debug/app-debug.apk app/FunesDroid-master/InputAPKs
-cd app/FunesDroid-master/
+mkdir -p FunesDroid-master/InputAPKs
+mv app/build/outputs/apk/debug/app-debug.apk FunesDroid-master/InputAPKs
+cd FunesDroid-master/
 python launchexp.py
