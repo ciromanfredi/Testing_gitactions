@@ -32,7 +32,7 @@ jobs:
 
     - name: exp
       run: |
-        cd ${ANDROID_HOME}/build-tools
+        cd ${ANDROID_HOME}/build-tools/24.0.0
         ls
         cd ..
         pwd
