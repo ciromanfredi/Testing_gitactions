@@ -32,7 +32,6 @@ jobs:
 
     - name: exp
       run: |
-        chmod u+x ./gradlew
         cd ..
         pwd
         ls
@@ -45,10 +44,8 @@ jobs:
         cd ..
         pwd
         ls
-
-
-  aapt dump badging app/build/outputs/apk/debug/app-debug.apk
-
+#  aapt dump badging app/build/outputs/apk/debug/app-debug.apk
+    -
     - name: Run emulator + funesDroid
       uses: reactivecircus/android-emulator-runner@v2
       with:
