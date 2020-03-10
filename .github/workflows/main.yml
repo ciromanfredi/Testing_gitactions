@@ -47,7 +47,7 @@ jobs:
         cp -R app/build/reports/androidTests/connected/ risultatiIstruInstrumentedTest/reports
         cp -R app/build/outputs/androidTest-results/connected/ risultatiIstruInstrumentedTest/outputs
 
-- name: Risultati FunesDroid
+    - name: Risultati FunesDroid
       uses: actions/upload-artifact@v1
       with:
         name: Risultati FunesDroid
