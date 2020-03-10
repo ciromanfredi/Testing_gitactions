@@ -32,7 +32,7 @@ jobs:
 
     - name: exp
       run: |
-        echo ${process.env.ANDROID_HOME}
+        echo ${env.ANDROID_HOME}
         cd ..
         pwd
         ls
