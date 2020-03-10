@@ -38,6 +38,9 @@ jobs:
         cd ..
         pwd
         ls
+        cd _actions
+        pwd
+        ls
         cd ..
         pwd
         ls
