@@ -41,8 +41,8 @@ jobs:
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
-
-    - run: cp -R build/reports/androidTests/connected build/outputs/androidTest-results/connected
+    - name: creo cartella per risultati Instrumented Test
+      run: cp -R app/build/reports/androidTests/connected app/build/outputs/androidTest-results/connected
 
     - name: Risultati FunesDroid
       uses: actions/upload-artifact@v1
@@ -54,7 +54,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Risultati Instrumented Test
-        path: build/outputs/androidTest-results/connected
+        path: app/build/outputs/androidTest-results/connected
 
 
 
