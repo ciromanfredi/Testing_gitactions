@@ -45,7 +45,7 @@ jobs:
         pwd
         ls
 #  aapt dump badging app/build/outputs/apk/debug/app-debug.apk
-    -
+
     - name: Run emulator + funesDroid
       uses: reactivecircus/android-emulator-runner@v2
       with:
