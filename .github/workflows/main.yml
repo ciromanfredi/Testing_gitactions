@@ -37,9 +37,21 @@ jobs:
         script: |
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
+          ./gradlew connectedAndroidTest
 
-    - name: Risultati
+    - run: cp -R build/reports/androidTests/connected build/outputs/androidTest-results/connected
+
+    - name: Risultati FunesDroid
       uses: actions/upload-artifact@v1
       with:
-        name: Risultati
+        name: Risultati FunesDroid
         path: FunesDroid-master/Results
+
+    - name: Risultati Instrumented Test
+      uses: actions/upload-artifact@v1
+      with:
+        name: Risultati Instrumented Test
+        path: build/outputs/androidTest-results/connected
+
+
+
