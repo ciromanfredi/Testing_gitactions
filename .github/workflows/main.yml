@@ -35,9 +35,12 @@ jobs:
       with:
         api-level: 29
         script: |
+          chmod u+x ./gradlew
+          ./gradlew connectedAndroidTest
+          ./gradlew assembleDebug
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
-          ./gradlew connectedAndroidTest
+
 
     - run: cp -R build/reports/androidTests/connected build/outputs/androidTest-results/connected
 
