@@ -31,16 +31,17 @@ jobs:
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
 #   ricavo package name (es. com.example.testing)
+#      ./gradlew assembleDebug
+#      packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
     - name: exp
       run: |
         chmod u+x ./gradlew
-        ./gradlew assembleDebug
-        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
+        packagenameloc=$(ls)
         echo "::set-env name={packagename}::{$packagenameloc}"
 
     - name: exp2
       run: |
-        echo $packagename
+        echo ${packagename}
 
     - name: Run emulator
       uses: reactivecircus/android-emulator-runner@v2
