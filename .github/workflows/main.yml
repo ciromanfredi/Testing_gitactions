@@ -18,11 +18,11 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
-    - name: Cache install...
-      uses: actions/cache@v1
-      with:
-        path: ${ANDROID_HOME}
-        key: manfrediciro
+#    - name: Cache install...
+#      uses: actions/cache@v1
+#      with:
+#        path: ${ANDROID_HOME}
+#        key: manfrediciro
 
     - name: Installo Python
       uses: actions/setup-python@v1
@@ -32,8 +32,6 @@ jobs:
 
     - name: build dell'apk e ricavo package name dall'apk per il monkey test
       run: |
-        /Users/runner/Library/Android/sdk/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &
-        adb shell getprop sys.boot_completed
         chmod u+x ./gradlew
         ./gradlew assembleDebug
         packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
@@ -46,9 +44,7 @@ jobs:
         script: |
           ./gradlew connectedAndroidTest
           ./gradlew lint
-          adb shell pm list packages
           adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
-          adb shell pm list packages
           adb shell monkey -p $packagename -v 100
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
