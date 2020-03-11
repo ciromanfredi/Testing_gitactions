@@ -67,7 +67,7 @@ jobs:
 #      with:
 #        path: ${ANDROID_HOME}
 #        key: manfrediciro
-    -
+
     - name: Autorizzo Gradle
       run: chmod u+x ./gradlew
 
