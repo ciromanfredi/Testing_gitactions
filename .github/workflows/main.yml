@@ -6,7 +6,7 @@ name: Progetto IS2 workflow
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ master_2 ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,17 +37,28 @@ jobs:
         packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
         echo "::set-env name=packagename::"$packagenameloc""
 
-    - name: Run emulator
-      uses: reactivecircus/android-emulator-runner@v2
+    - name: Install SDK
+      uses: ciromanfredi/android-emulator-runner
       with:
-        api-level: 29
-        script: |
-          ./gradlew connectedAndroidTest
-          ./gradlew lint
-          adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
-          adb shell monkey -p $packagename -v 100
-          chmod u+x .github/scripts/funesdroid.sh
-          .github/scripts/funesdroid.sh
+        operation: install
+
+    - name: Create emulator
+      uses: ciromanfredi/android-emulator-runner
+      with:
+        operation: create
+
+    - name: Launch emulator
+      uses: ciromanfredi/android-emulator-runner
+      with:
+        operation: launch
+
+#        script: |
+#          ./gradlew connectedAndroidTest
+#          ./gradlew lint
+#          adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
+#          adb shell monkey -p $packagename -v 100
+#          chmod u+x .github/scripts/funesdroid.sh
+#          .github/scripts/funesdroid.sh
 
     - name: Creo cartella per risultati Instrumented Test
       run: |
