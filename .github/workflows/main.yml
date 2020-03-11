@@ -32,20 +32,21 @@ jobs:
 
     - name: exp
       run: |
+      # ricavo package name (es. com.example.testing)
         chmod u+x ./gradlew
         ./gradlew assembleDebug
-        ${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}'
+        ${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}'>${packagename}
 
-    - name: Run emulator + funesDroid
+    - name: Run emulator
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
         script: |
-          chmod u+x ./gradlew
+        # istrumentation test
           ./gradlew connectedAndroidTest
-          ./gradlew assembleDebug
-          adb shell pm list packages -3 -f > listapackagenamethirdpart.txt
-          adb shell monkey -p -v
+        # monkey test
+          adb shell monkey -p ${packagename} -v 100
+        # funesDroid
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
