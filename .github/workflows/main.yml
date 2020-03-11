@@ -38,17 +38,17 @@ jobs:
         echo "::set-env name=packagename::"$packagenameloc""
 
     - name: Install SDK
-      uses: ciromanfredi/android-emulator-runner
+      uses: ciromanfredi/android-emulator-runner@v1
       with:
         operation: install
 
     - name: Create emulator
-      uses: ciromanfredi/android-emulator-runner
+      uses: ciromanfredi/android-emulator-runner@v1
       with:
         operation: create
 
     - name: Launch emulator
-      uses: ciromanfredi/android-emulator-runner
+      uses: ciromanfredi/android-emulator-runner@v1
       with:
         operation: launch
 
