@@ -43,12 +43,13 @@ jobs:
       with:
         api-level: 29
         script: |
+          echo $packagename
           ./gradlew connectedAndroidTest
           adb shell monkey -p $packagename -v 100
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
-    - name: creo cartella per risultati Instrumented Test
+    - name: Creo cartella per risultati Instrumented Test
       run: |
         mkdir -p risultatiIstruInstrumentedTest
         cp -R app/build/reports/androidTests/connected/ risultatiIstruInstrumentedTest/reports
