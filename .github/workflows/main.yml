@@ -49,7 +49,6 @@ jobs:
     - name: Launch AVD
       run: |
         echo "Launch AVD."
-        adb start-server
         chmod u+x .github/scripts/waitdevice.sh
         ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim | .github/scripts/waitdevice.sh
 
