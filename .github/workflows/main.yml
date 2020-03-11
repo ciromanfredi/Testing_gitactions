@@ -19,6 +19,7 @@ jobs:
       target: default
       arch: x86
       CMDLINE_TOOLS_URL: https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
+      nomeemulatore: test
     steps:
 
     - name: checkout
@@ -38,6 +39,22 @@ jobs:
         sdkmanager --install emulator > /dev/null
         echo "Installing system images"
         sdkmanager --install 'system-images;android-'${apiLevel}';'${target}';'${arch} > /dev/null
+
+    - name: Create AVD
+      run: |
+        echo "Creating AVD without custom profile."
+        echo no | avdmanager create avd --force -n ${nomeemulatore} --abi ${target}/${arch} --package 'system-images;android-'${apiLevel}';'${target}';'${arch}
+
+    - name: Launch AVD
+      run: |
+        echo "Launch AVD."
+        ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        chmod u+x .github/scripts/waitdevice.sh
+        .github/scripts/waitdevice.sh
+        echo "Disabling animations."
+        adb shell settings put global window_animation_scale 0.0
+        adb shell settings put global transition_animation_scale 0.0
+        adb shell settings put global animator_duration_scale 0.0
 
 
 #    - name: Cache install...
