@@ -52,24 +52,6 @@ jobs:
         echo "Creating AVD without custom profile."
         echo no | avdmanager create avd --force -n ${nomeemulatore} --abi ${target}/${arch} --package 'system-images;android-'${apiLevel}';'${target}';'${arch}
 
-    - name: Eseguo Lint Test
-      if: always()
-      run: |
-        ./gradlew lint
-        vfchbd xjszkm
-
-    - name: Creo cartella per risultati Lint Test
-      run: |
-        mkdir -p risultatiLintTest
-        cp -R app/build/reports/lint-results.html risultatiLintTest
-        cp -R app/build/reports/lint-results.xml risultatiLintTest
-
-    - name: Risultati Lint Test
-      uses: actions/upload-artifact@v1
-      with:
-        name: Risultati Lint Test
-        path: risultatiLintTest
-
     - name: Launch AVD
       run: |
         echo "Launch AVD."
@@ -89,6 +71,22 @@ jobs:
 
     - name: Autorizzo Gradle
       run: chmod u+x ./gradlew
+
+    - name: Eseguo Lint Test
+      run: |
+        ./gradlew lint
+
+    - name: Creo cartella per risultati Lint Test
+      run: |
+        mkdir -p risultatiLintTest
+        cp -R app/build/reports/lint-results.html risultatiLintTest
+        cp -R app/build/reports/lint-results.xml risultatiLintTest
+
+    - name: Risultati Lint Test
+      uses: actions/upload-artifact@v1
+      with:
+        name: Risultati Lint Test
+        path: risultatiLintTest
 
     - name: Eseguo Instrumented Test
       run :
@@ -126,6 +124,6 @@ jobs:
       with:
         name: Risultati FunesDroid
         path: FunesDroid-master/Results
-#
+
 #    - name: Kill emulator
 #      run: adb -s emulator-5554 emu kill
