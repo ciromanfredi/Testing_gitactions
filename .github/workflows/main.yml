@@ -37,7 +37,7 @@ jobs:
       run: |
         chmod u+x ./gradlew
         ./gradlew assembleDebug
-        packagename=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
+        sh packagename=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
 
     - name: Run emulator
       uses: reactivecircus/android-emulator-runner@v2
