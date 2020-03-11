@@ -104,13 +104,15 @@ jobs:
         name: Risultati Lint Test
         path: risultatiLintTest
 
-    - name: Eseguo Monkey Test
+    - name: Azioni preliminari Monkey Test
       run: |
         ./gradlew assembleDebug
         packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
         echo "::set-env name=packagename::"$packagenameloc""
         adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
-        adb shell monkey -p $packagename -v 100
+
+    - name: Eseguo Monkey Test
+      run: adb shell monkey -p $packagename -v 100
 
     - name: Eseguo FunesDroid Test
       run: |
