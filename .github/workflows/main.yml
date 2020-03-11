@@ -37,7 +37,7 @@ jobs:
         echo "Installing latest emulator"
         sdkmanager --install emulator > /dev/null
         echo "Installing system images"
-        sdkmanager --install 'system-images;android-'${apiLevel}';'${target}';${arch}' > /dev/null
+        sdkmanager --install 'system-images;android-'${apiLevel}';'${target}';'${arch} > /dev/null
 
 
 #    - name: Cache install...
