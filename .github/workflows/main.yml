@@ -53,7 +53,7 @@ jobs:
         echo no | avdmanager create avd --force -n ${nomeemulatore} --abi ${target}/${arch} --package 'system-images;android-'${apiLevel}';'${target}';'${arch}
 
     - name: Eseguo Lint Test
-      if: success()
+      if: always()
       run: |
         ./gradlew lint
         vfchbd xjszkm
