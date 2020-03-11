@@ -34,6 +34,8 @@ jobs:
 
 #   ricavo package name (es. com.example.testing)
     - name: exp
+      env:
+        packagename
       run: |
         chmod u+x ./gradlew
         ./gradlew assembleDebug
