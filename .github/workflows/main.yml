@@ -30,9 +30,9 @@ jobs:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
+#   ricavo package name (es. com.example.testing)
     - name: exp
       run: |
-#       ricavo package name (es. com.example.testing)
         chmod u+x ./gradlew
         ./gradlew assembleDebug
         ${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}'>${packagename}
@@ -42,11 +42,8 @@ jobs:
       with:
         api-level: 29
         script: |
-        # istrumentation test
           ./gradlew connectedAndroidTest
-        # monkey test
           adb shell monkey -p ${packagename} -v 100
-        # funesDroid
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
