@@ -6,7 +6,6 @@ do
 done
 sleep 10
 echo "device avviato e pronto."
-return 0
 #echo "Sblocco il device"
 #adb shell input keyevent 82
 #echo "Disabling animations."
