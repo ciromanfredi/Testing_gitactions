@@ -21,7 +21,7 @@ jobs:
     - name: Install SKD
       run: |
         echo "Installing new cmdline-tools."
-        mkdir ${ANDROID_HOME}/cmdline-tools`);
+        mkdir ${ANDROID_HOME}/cmdline-tools
         curl -fo commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
         unzip -q commandlinetools.zip -d ${ANDROID_HOME}/cmdline-tools
         rm -f commandlinetools.zip
