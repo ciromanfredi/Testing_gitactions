@@ -31,12 +31,12 @@ jobs:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-    - name: build dell'apk e ricavo package name dall'apk per il monkey test
-      run: |
-        chmod u+x ./gradlew
-        ./gradlew assembleDebug
-        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
-        echo "::set-env name=packagename::"$packagenameloc""
+#    - name: build dell'apk e ricavo package name dall'apk per il monkey test
+#      run: |
+#        chmod u+x ./gradlew
+#        ./gradlew assembleDebug
+#        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
+#        echo "::set-env name=packagename::"$packagenameloc""
 
     - name: Install SKD
       run: |
