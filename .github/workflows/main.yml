@@ -33,11 +33,11 @@ jobs:
         rm -f commandlinetools.zip
         export PATH=${ANDROID_HOME}/cmdline-tools/tools:${ANDROID_HOME}/cmdline-tools/tools/bin:${ANDROID_HOME}/platform-tools:$PATH
         echo "Installing latest build tools, platform tools, and platform."
-        sdkmanager --install 'build-tools;${BUILD_TOOLS_VERSION}' platform-tools 'platforms;android-${apiLevel}' > /dev/null
+        sdkmanager --install 'build-tools;'${BUILD_TOOLS_VERSION} platform-tools 'platforms;android-'${apiLevel} > /dev/null
         echo "Installing latest emulator"
         sdkmanager --install emulator > /dev/null
         echo "Installing system images"
-        sdkmanager --install 'system-images;android-${apiLevel};${target};${arch}' > /dev/null
+        sdkmanager --install 'system-images;android-'${apiLevel}';'${target}';${arch}' > /dev/null
 
 
 #    - name: Cache install...
