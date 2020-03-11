@@ -71,7 +71,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Risultati Lint Test
-        path: risultatiLintTes
+        path: risultatiLintTest
 
     - name: Risultati FunesDroid
       uses: actions/upload-artifact@v1
