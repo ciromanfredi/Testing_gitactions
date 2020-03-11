@@ -60,7 +60,10 @@ jobs:
         echo no | avdmanager create avd --force -n ${nomeemulatore} --abi ${target}/${arch} --package 'system-images;android-'${apiLevel}';'${target}';'${arch}
 
     - name: Launch AVD
-      run: echo "Launch AVD." | chmod u+x .github/scripts/waitdevice.sh | ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim | .github/scripts/waitdevice.sh || true
+      run: |
+        echo "Launch AVD."
+        chmod u+x .github/scripts/waitdevice.sh
+        ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim | .github/scripts/waitdevice.sh | true
 
 #    - name: Cache install...
 #      uses: actions/cache@v1
