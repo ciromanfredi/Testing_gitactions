@@ -36,12 +36,12 @@ jobs:
     - name: exp
       run: |
         chmod u+x ./gradlew
-        packagenameloc=$(ls)
-        echo "::set-env name={packagename}::{$packagenameloc}"
+        packagenameloc="ssss"
+        echo "::set-env name=packagename::"$packagenameloc""
 
     - name: exp2
       run: |
-        echo ${packagename}
+        echo $packagename
 
     - name: Run emulator
       uses: reactivecircus/android-emulator-runner@v2
