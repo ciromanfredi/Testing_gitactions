@@ -31,12 +31,11 @@ jobs:
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
 #   ricavo package name (es. com.example.testing)
-#      ./gradlew assembleDebug
-#      packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
     - name: exp
       run: |
         chmod u+x ./gradlew
-        packagenameloc="ssss"
+        ./gradlew assembleDebug
+        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
         echo "::set-env name=packagename::"$packagenameloc""
 
     - name: exp2
