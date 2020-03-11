@@ -31,13 +31,6 @@ jobs:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-#    - name: build dell'apk e ricavo package name dall'apk per il monkey test
-#      run: |
-#        chmod u+x ./gradlew
-#        ./gradlew assembleDebug
-#        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
-#        echo "::set-env name=packagename::"$packagenameloc""
-
     - name: Install SKD
       run: |
         echo "Installing new cmdline-tools."
@@ -76,19 +69,12 @@ jobs:
 #        key: manfrediciro
 
 
-    - name: Eseguo script
-      run : |
-        adb devices
-        chmod u+x ./gradlew
-        ./gradlew connectedAndroidTest
-        ./gradlew lint
-        adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
-        adb shell monkey -p $packagename -v 100
-        chmod u+x .github/scripts/funesdroid.sh
-        .github/scripts/funesdroid.sh
+    - name: Autorizzo Gradle
+      run: chmod u+x ./gradlew
 
-    - name: Kill emulator
-      run: adb -s emulator-5554 emu kill
+    - name: Eseguo Instrumented Test
+      run :
+        ./gradlew connectedAndroidTest
 
     - name: Creo cartella per risultati Instrumented Test
       run: |
@@ -102,6 +88,10 @@ jobs:
         name: Risultati Instrumented Test
         path: risultatiIstruInstrumentedTest
 
+    - name: Eseguo Lint Test
+      run: |
+        ./gradlew lint
+
     - name: Creo cartella per risultati Lint Test
       run: |
         mkdir -p risultatiLintTest
@@ -114,8 +104,24 @@ jobs:
         name: Risultati Lint Test
         path: risultatiLintTest
 
+    - name: Eseguo Monkey Test
+      run: |
+        ./gradlew assembleDebug
+        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
+        echo "::set-env name=packagename::"$packagenameloc""
+        adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
+        adb shell monkey -p $packagename -v 100
+
+    - name: Eseguo FunesDroid Test
+      run: |
+        chmod u+x .github/scripts/funesdroid.sh
+        .github/scripts/funesdroid.sh
+
     - name: Risultati FunesDroid
       uses: actions/upload-artifact@v1
       with:
         name: Risultati FunesDroid
         path: FunesDroid-master/Results
+
+    - name: Kill emulator
+      run: adb -s emulator-5554 emu kill
