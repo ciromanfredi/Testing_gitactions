@@ -6,9 +6,9 @@ do
 done
 sleep 10
 echo "device avviato e pronto."
-echo "Sblocco il device"
-adb shell input keyevent 82
-echo "Disabling animations."
-adb shell settings put global window_animation_scale 0.0
-adb shell settings put global transition_animation_scale 0.0
-adb shell settings put global animator_duration_scale 0.0
+#echo "Sblocco il device"
+#adb shell input keyevent 82
+#echo "Disabling animations."
+#adb shell settings put global window_animation_scale 0.0
+#adb shell settings put global transition_animation_scale 0.0
+#adb shell settings put global animator_duration_scale 0.0
