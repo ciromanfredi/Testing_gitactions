@@ -62,8 +62,7 @@ jobs:
     - name: Launch AVD
       run: |
         echo "Launch AVD."
-        ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-      background: true
+        ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &
 
     - name: Wait terminal
       run: |
