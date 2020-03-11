@@ -32,7 +32,7 @@ jobs:
         curl -fo commandlinetools.zip ${CMDLINE_TOOLS_URL}
         unzip -q commandlinetools.zip -d ${ANDROID_HOME}/cmdline-tools
         rm -f commandlinetools.zip
-        export PATH=${ANDROID_HOME}/cmdline-tools/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/cmdline-tools/tools/bin:${ANDROID_HOME}/platform-tools:$PATH
+        export PATH=${ANDROID_HOME}/cmdline-tools/tools:${ANDROID_HOME}/cmdline-tools/tools/bin:${ANDROID_HOME}/platform-tools:$PATH
         echo "Installing latest build tools, platform tools, and platform."
         sdkmanager --install 'build-tools;'${BUILD_TOOLS_VERSION} platform-tools 'platforms;android-'${apiLevel} > /dev/null
         echo "Installing latest emulator"
@@ -42,6 +42,10 @@ jobs:
 
     - name: Create AVD
       run: |
+        export PATH=${ANDROID_HOME}/tools/bin:$PATH
+        echo $PATH
+        cd ${ANDROID_HOME}/tools/bin
+        ls
         echo "Creating AVD without custom profile."
         echo no | avdmanager create avd --force -n ${nomeemulatore} --abi ${target}/${arch} --package 'system-images;android-'${apiLevel}';'${target}';'${arch}
 
