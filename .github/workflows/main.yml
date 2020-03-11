@@ -50,6 +50,7 @@ jobs:
       run: |
         echo "Launch AVD."
         ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+        echo "sono qui"
         chmod u+x .github/scripts/waitdevice.sh
         .github/scripts/waitdevice.sh
         echo "Disabling animations."
