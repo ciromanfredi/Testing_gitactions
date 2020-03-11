@@ -18,11 +18,11 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
-#    - name: Cache install...
-#      uses: actions/cache@v1
-#      with:
-#        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-#        key: manfrediciro
+    - name: Cache install...
+      uses: actions/cache@v1
+      with:
+        path: ${ANDROID_HOME}
+        key: manfrediciro
 
     - name: Installo Python
       uses: actions/setup-python@v1
