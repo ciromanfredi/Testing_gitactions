@@ -42,9 +42,9 @@ jobs:
       with:
         api-level: 29
         script: |
-          adb shell pm list packages
           ./gradlew connectedAndroidTest
           ./gradlew lint
+          adb shell pm list packages
           adb shell monkey -p $packagename -v 100
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
