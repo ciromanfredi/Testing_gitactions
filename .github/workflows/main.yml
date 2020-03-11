@@ -30,28 +30,8 @@ jobs:
         python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
-#   ricavo package name (es. com.example.testing)
-    - name: exp
-      run: |
-        chmod u+x ./gradlew
-        ./gradlew assembleDebug
-        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
-        echo "::set-env name=packagename::"$packagenameloc""
-
-    - name: exp2
-      run: |
-        echo $packagename
-
-    - name: Run emulator
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 29
-        script: |
-          echo $packagename
-          ./gradlew connectedAndroidTest
-          adb shell monkey -p $packagename -v 100
-          chmod u+x .github/scripts/funesdroid.sh
-          .github/scripts/funesdroid.sh
+    - name: Run Instrumented Test
+      run: ./gradlew connectedAndroidTest
 
     - name: Creo cartella per risultati Instrumented Test
       run: |
@@ -59,17 +39,45 @@ jobs:
         cp -R app/build/reports/androidTests/connected/ risultatiIstruInstrumentedTest/reports
         cp -R app/build/outputs/androidTest-results/connected/ risultatiIstruInstrumentedTest/outputs
 
-    - name: Risultati FunesDroid
-      uses: actions/upload-artifact@v1
-      with:
-        name: Risultati FunesDroid
-        path: FunesDroid-master/Results
-
     - name: Risultati Instrumented Test
       uses: actions/upload-artifact@v1
       with:
         name: Risultati Instrumented Test
         path: risultatiIstruInstrumentedTest
 
+    - name: Run Lint Test
+      run: ./gradlew lint
 
+    - name: Creo cartella per risultati Lint Test
+      run: |
+        mkdir -p risultatiLintTest
+        cp -R app/build/reports/lint-results.html risultatiLintTest
+        cp -R app/build/reports/lint-results.xml risultatiLintTest
 
+    - name: Risultati Lint Test
+      uses: actions/upload-artifact@v1
+      with:
+        name: Risultati Lint Test
+        path: risultatiLintTest
+
+    - name: build dell'apk e ricavo package name dall'apk per il monkey test
+      run: |
+        chmod u+x ./gradlew
+        ./gradlew assembleDebug
+        packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
+        echo "::set-env name=packagename::"$packagenameloc""
+
+    - name: Run emulator
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 29
+        script: |
+          adb shell monkey -p $packagename -v 100
+          chmod u+x .github/scripts/funesdroid.sh
+          .github/scripts/funesdroid.sh
+
+    - name: Risultati FunesDroid
+      uses: actions/upload-artifact@v1
+      with:
+        name: Risultati FunesDroid
+        path: FunesDroid-master/Results
