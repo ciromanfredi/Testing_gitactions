@@ -189,6 +189,8 @@ jobs:
 
       - name: Eseguo FunesDroid Test
         run: |
+          echo "Costruisco apk."
+          ./gradlew assembleDebug
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
