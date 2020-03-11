@@ -108,6 +108,10 @@ jobs:
   linttest:
     runs-on: macos
     steps:
+
+    - name: checkout
+      uses: actions/checkout@v2
+
     - name: Autorizzo Gradle
       run: chmod u+x ./gradlew
 
