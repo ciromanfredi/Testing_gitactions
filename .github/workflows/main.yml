@@ -63,7 +63,7 @@ jobs:
       run: |
         echo "Launch AVD."
         chmod u+x .github/scripts/waitdevice.sh
-        ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim | .github/scripts/waitdevice.sh ; true
+        ${ANDROID_HOME}/emulator/emulator -avd test -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim | .github/scripts/waitdevice.sh ; return true
 
 #    - name: Cache install...
 #      uses: actions/cache@v1
