@@ -81,9 +81,8 @@ jobs:
         chmod u+x .github/scripts/funesdroid.sh
         .github/scripts/funesdroid.sh
 
-    -name: Kill emulator
-     run: |
-      adb -s emulator-5554 emu kill
+    - name: Kill emulator
+      run: adb -s emulator-5554 emu kill
 
     - name: Creo cartella per risultati Instrumented Test
       run: |
