@@ -5,6 +5,7 @@ import sys
 import time
 import shutil
 from datetime import datetime
+import tempfile
 
 # FUNZIONI UTILIZZATE IN ANDROLEAK
 
@@ -413,14 +414,94 @@ def makeLeakingReport(package):
         raise
 
     # Writing ActivityReport.csv
-    try:
-        with open('Results/'+package+'/ActivityReport.csv', 'w') as f:
-            if(APKhasLeaked=="True"):
-                for line in ActivityLeakedLog:
-                    f.write(str(line)+"\n")
-            elif(APKhasLeaked=="False"):
-                f.write("The application has no leaks! No Leak Activities are,"+str(numActivityNoLeaked))
-        f.close()
-    except:
-        print("Unexpected error writing ActivityReport.txt")
-        raise
+ #   try:
+ #       with open('Results/'+package+'/ActivityReport.csv', 'w') as f:
+ #           if(APKhasLeaked=="True"):
+ #               for line in ActivityLeakedLog:
+ #                   f.write(str(line)+"\n")
+ #           elif(APKhasLeaked=="False"):
+ #               f.write("The application has no leaks! No Leak Activities are,"+str(numActivityNoLeaked))
+ #       f.close()
+ #   except:
+ #       print("Unexpected error writing ActivityReport.txt")
+ #       raise
+
+
+
+# elimina i file .hprof (dump di memoria di una JVM) dalla cartella Results/package/ActivityMain e C:\User\your_user\AppData\Local\Temp\junit*
+# realized by Pizzata Antonio & Russo Davide 2019
+
+def delete_hprof(package):
+    my_dir = tempfile.gettempdir() #prende la directory dei file temporanei, indipendente dal SO
+    for fname in os.listdir(my_dir):
+        if fname.startswith("junit"):
+            print("deleting file: "+my_dir+"\\"+fname)
+            shutil.rmtree(my_dir+"\\"+fname)
+    listfiles= os.listdir("Results/"+package)
+    for dir in listfiles:
+        if os.path.isdir("Results/"+package+"/"+str(dir)):
+            for fname in os.listdir("Results/"+package+"/"+str(dir)):
+                if fname.endswith(".hprof"):
+                    print("deleting file: Results\\"+package+"\\"+dir+"\\"+fname)
+                    os.remove("Results\\"+package+"\\"+dir+"\\"+fname)
+
+# realizza il file .csv finale contenente i dati riassuntivi della test-suite eseguito. Utilizza file generati in precedenza e li combina in modo opportuno. 
+# realized by Pizzata Antonio & Russo Davide 2019
+
+def makeAndroLeakReportPizzataRusso(file_name,apk_name,event_name,num_iteration_event,w_time_event,package_directory):
+    
+    makeLeakingReport(package_directory)
+    listfiles = os.listdir("Results/"+package_directory)
+    dir_princ= 'Results'+'\\'+package_directory+'\\' #directory contenente gli output temporanei del test eseguito
+    Log = []
+   
+    if not os.path.exists("Results/"+str(file_name)+".csv"):
+        header="APK;LES;NEvent;Wtime;Num of Activities;Num of Crashed Activities;Leaked Activities;Total Shallow Heap;Total Retained Size\n"
+        Log.append(header)
+    
+    result1=""
+    result2=""
+    result3=""
+    if os.path.isdir("Results/"+str(package_directory)):
+        result1 = str(apk_name)+";"+str(event_name)+";"+str(num_iteration_event)+";"+str(w_time_event)
+        print("RESULT 1: "+result1)
+        ReportFile = str(dir_princ)+'LeakingReport.csv' 
+        ResultFile = str(dir_princ)+str(package_directory)+'_results.txt'	
+        print('REPORT FILE: '+ReportFile+' RESULT FILE: '+ResultFile)
+        if os.path.isfile(str(dir_princ)+str(package_directory)+'_results.txt'):
+            f = open(ResultFile,"r")
+            for line in f:
+                if("NUMBER OF ACTIVITIES:" in line):
+                    tmp = str(line).split()
+                    num_activities = tmp[-1]
+                elif("NUMBER OF CRASHED ACTIVITIES:" in line):
+                    tmp = str(line).split()
+                    num_crashed_activities = tmp[-1]
+            tested_activities=str(int(num_activities)-int(num_crashed_activities))
+            result2 = ";"+num_activities+";"+tested_activities
+            print("RESULT 2: "+result2)
+            f.close()			
+			
+        if os.path.isfile(str(dir_princ)+'LeakingReport.csv'):			
+            open_file=open(ReportFile,'r')
+            file_lines=open_file.readlines()
+            second_line = file_lines[1].strip()  # Second Line			
+            if("The application has no leaks!" not in second_line):
+                result3=";"+str(second_line).replace(",",";")+"\n"
+            else:
+                result3=";0;0;0\n"
+            open_file.close()
+			
+            print("RESULT 3: "+result3)
+	
+            Log.append(result1+result2+result3)
+    # Writing file_name.csv
+        try:
+            with open("Results/"+str(file_name)+".csv", "a") as csvfile:# Create and open the CSV file
+                spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')			
+                for line in Log:
+                    csvfile.write(line)
+            csvfile.close()
+        except:
+            print("Unexpected error writing"+file_name+".csv")
+            raise

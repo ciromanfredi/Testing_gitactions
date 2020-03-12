@@ -350,7 +350,8 @@ except:
     raise
 
 #Creating LeakingReport.txt
-makeLeakingReport(package)
+makeAndroLeakReportPizzataRusso("AndroidLeakReport",str(apk_name),str(stimulus_type),str(rot_numbers),str(WAIT_TIME),str(package))	
+
 
 #Riavvio di ADB
 print("Restarting ADB service")
@@ -366,6 +367,7 @@ try:
 except:
     print("[ERROR DELETING TEMPORARY FILES] Error."+str(sys.exc_info()[0]))
 
+delete_hprof(package)
 os.rename("Results/"+package,"Results/"+package+"_"+stimulus_type+"_N"+str(rot_numbers)+"_t"+str(WAIT_TIME)+"_"+str(int(time.time())))	
 print("Execution completed. You can find results in Results/ folder")
 # Raffaele Sellitto. 02/01/2018. 

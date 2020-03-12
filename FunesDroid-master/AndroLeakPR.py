@@ -65,11 +65,13 @@ if(len(li)==2):
         raise SystemExit(0);
     else:
         raise SyntaxError('You are using this command wrongly. Check the syntax (use the option help). ')
-elif(len(li)==5):
+elif(len(li)==7):
     DEVICE = li[1]
     stimulus_type = li[2]
     num_rotations = int(li[3])	
     WAIT_TIME = int(li[4])
+    APK = li[5]
+    num_apk = int(li[6])
     sample_size = 1
     REBOOT_TIME = 0
 else:
@@ -116,39 +118,31 @@ print("Setting Device's date and time to: "+device_time)
 cmd = "adb -s "+DEVICE+" shell \"su 0 toybox date "+device_time_dformat+"\""
 os.system(cmd)
 
-#Listo gli apk contenuti nella cartella InputAPKs/
-apks_list = os.listdir("InputAPKs/")
-
-#Effettuo gli esperimenti per ogni apk
 StartingExperimentsTime = time.strftime("%d/%m/%Y "+"%I:%M:%S")
 print("Starting experiments: " + StartingExperimentsTime)
 i = 0
 count = 0
-num_apk = len(apks_list)
 
-for a in apks_list:
-    if(REBOOT_TIME>0 and count==REBOOT_TIME):
-        count=0
-        rebootEmulator()
-    print("----- Starting experiments on application " + a + " -----")
-    time.sleep(WAIT_TIME)
-    apk_to_execute = "InputAPKs/"+a
-    print(apk_to_execute)
-    cmd = "python TestExecutor.py "+DEVICE+" "+apk_to_execute+" "+stimulus_type+" "+str(num_rotations)+" "+str(WAIT_TIME)+" "
-    os.system(cmd)
-    i=i+1
-    count=count+1
-    AndroLeakUtil.printProgressBar(i,num_apk,length=30) # Displaying Progress Bar
-    waitDeviceHasBooted() # Useful in cases of Emulator crashes
+
+if(REBOOT_TIME>0 and count==REBOOT_TIME):
+    count=0
+    rebootEmulator()
+print("----- Starting experiments on application " + APK + " -----")
+time.sleep(WAIT_TIME)
+apk_to_execute = "InputAPKs/"+APK
+print(apk_to_execute)
+cmd = "python TestExecutor.py "+DEVICE+" "+apk_to_execute+" "+stimulus_type+" "+str(num_rotations)+" "+str(WAIT_TIME)+" "
+os.system(cmd)
+i=i+1
+count=count+1
+AndroLeakUtil.printProgressBar(i,num_apk,length=30) # Displaying Progress Bar
+waitDeviceHasBooted() # Useful in cases of Emulator crashes
         
 EndingExperimentsTime = time.strftime("%d/%m/%Y "+"%I:%M:%S")
 print("Ending experiments: " + EndingExperimentsTime)
 
 #Riabilita accellerometro su dispositivo
 os.system("adb -s "+DEVICE+" shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:1")
-
-#Genera il Report finale
-AndroLeakUtil.makeAndroLeakReport()
 
 #Creo il file results.txt
 #Se non esiste la directory di risultato la creo
