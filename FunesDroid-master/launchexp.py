@@ -46,7 +46,7 @@ apkList= os.listdir('InputAPKs')
 nomeemulatore="emulatore"
 target="default"
 arch="x86"
-apiLevel=29
+
 i=0
 for apk in apkList:
     for t in wtime:
@@ -57,7 +57,7 @@ for apk in apkList:
                 print('Starting new experiment, event: '+event+', number of les:' +str(number))
                 emulator= "em"+datetime.now().strftime('%Y%m%d%H%M%S')
                 apiversion_string= str(apiversion[0])
-                create_avd= "echo no | avdmanager create avd --force -n {} --abi {}/{} --package system-images;android-{};{};{}".format(nomeemulatorecurr,target,arch,apiLevel,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
+                create_avd= "echo no | avdmanager create avd --force -n {} --abi {}/{} --package system-images;android-{};{};{}".format(nomeemulatorecurr,target,arch,apiversion,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= 'emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
                 cmd = "python AndroLeakPR.py "+nomeemulatorecurr+" "+event+" "+str(number)+" "+str(t)+" "+apk+" "+str(len(apkList)) #root progetto
                 delete_avd = 'echo no | avdmanager delete avd --force -n {}'.format(nomeemulatorecurr) #directory in cui sono installati gli sdk ed i loro strumenti
