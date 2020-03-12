@@ -63,7 +63,7 @@ for apk in apkList:
                 delete_avd = 'echo no | avdmanager delete avd --force -n {}'.format(nomeemulatorecurr) #directory in cui sono installati gli sdk ed i loro strumenti
                 os.system('ls')
                 os.system('pwd')
-                os.system('echo $PATH')
+                os.system('export PATH=${ANDROID_HOME}/cmdline-tools/tools:${ANDROID_HOME}/cmdline-tools/tools/bin:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools/bin:$PATH')
                 os.system(create_avd)
                 os.system(start_avd)
                 os.system(cmd)
