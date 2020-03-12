@@ -1,5 +1,5 @@
 import requests
-
+import sys
 def main(argv):
     for i in range(5,17):
         if argv[i]<1 or argv[i]>15 or not argv[1].isnumeric():
@@ -49,4 +49,4 @@ def main(argv):
     print(response.text)
 
 if __name__ == "__main__":
-   main(argv[1:])
+   main(sys.argv[1:])
