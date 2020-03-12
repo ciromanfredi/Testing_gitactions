@@ -56,13 +56,14 @@ for apk in apkList:
                 apiversion_string= str(apiversion[0])
                 create_avd= "echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager create avd --force -n {} --abi {}/{} --package 'system-images;android-'{}';'{}';'{}'".format(nomeemulatorecurr,target,arch,apiversion,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= '/Users/runner/Library/Android/sdk/emulator/emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
+                os.system('adb start-server')
                 cmd = "python AndroLeakPR.py "+nomeemulatorecurr+" "+event+" "+str(number)+" "+str(t)+" "+apk+" "+str(len(apkList)) #root progetto
                 delete_avd = 'echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager delete avd --force -n {}'.format(nomeemulatorecurr) #directory in cui sono installati gli sdk ed i loro strumenti
                 os.system(create_avd)
                 os.system(start_avd)
                 os.system(cmd)
                 os.popen("adb devices")
-                os.popen("adb -s emulator-5554 emu kill")
+                os.popen("adb -s "+nomeemulatorecurr+" emu kill")
                 os.system(delete_avd)
                     
 #Check della presenza dei file di WARNING  e le si sposta nella cartella \Results
