@@ -54,9 +54,6 @@ def waitDeviceHasBooted():
 if os.listdir("InputAPKs") == []: 
     raise ValueError('InputAPKs\ is empty. You must put some apk files in InputAPKs\.')
 
-#Aspetto, eventualmente, che il device finisca il boot
-waitDeviceHasBooted()
-
 #Recupero il numero di rotazioni e campionamenti dall'input
 li = sys.argv
 if(len(li)==2):
@@ -76,6 +73,10 @@ elif(len(li)==7):
     REBOOT_TIME = 0
 else:
     raise SyntaxError(str(len(li))+' You are using this command wrongly. Check the syntax (use the option help). ')
+
+#Aspetto, eventualmente, che il device finisca il boot
+waitDeviceHasBooted()
+
 
 # Input Validation.
 if(sample_size>10000 or sample_size <=0):
