@@ -5,7 +5,7 @@ def main(argv):
         if argv[i]<1 or argv[i]>15 or not argv[1].isnumeric():
             argv[i]=1
 
-    if argv[4]<25 or argv[4]>29
+    if argv[4]<25 or argv[4]>29:
         argv[4]=27
 
     data=dict(
