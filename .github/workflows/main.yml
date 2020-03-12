@@ -63,6 +63,7 @@ jobs:
       run: |
         ./gradlew assembleDebug
         packagenameloc=$(${ANDROID_HOME}/build-tools/24.0.0/aapt dump badging app/build/outputs/apk/debug/app-debug.apk | grep package:\ name | awk -v FS="'" '/package: name=/{print $2}')
+        echo $packagenameloc
         echo "::set-env name=packagename::"$packagenameloc""
         adb -s emulator-5554 install app/build/outputs/apk/debug/app-debug.apk
 
