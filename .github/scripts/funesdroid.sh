@@ -10,4 +10,4 @@ echo "Eseguo script funesDroid..."
 mkdir -p FunesDroid-master/InputAPKs
 mv app/build/outputs/apk/debug/app-debug.apk FunesDroid-master/InputAPKs
 cd FunesDroid-master/
-python launchexp.py -les [doc|bf|stai] -nevent [n] -wtime [w] -api [a]
+python launchexp.py -les ["doc","bf","stai"] -nevent [1] -wtime [1] -api [29]
