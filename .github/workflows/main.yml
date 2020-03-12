@@ -186,6 +186,26 @@ jobs:
           name: Risultati FunesDroid
           path: FunesDroid-master/Results
 
+  FunesDroidTestInvioRichiesta:
+    runs-on: macos
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Installo Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+          architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+
+      - name: Eseguo FunesDroid Test
+        run: |
+          echo "Costruisco apk."
+          ./gradlew assembleDebug
+          python .github/scripts/richiestapython.py "https://143.225.229.45:443/start" "ciro__napoli@hotmail.it" "app/build/outputs/apk/debug/app-debug.apk" 29 1 1 1 1 1 1 1 1 1 1 1 1 si si si
+
+
   LintTest:
     runs-on: macos
     steps:
