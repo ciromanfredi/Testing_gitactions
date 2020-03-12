@@ -61,6 +61,9 @@ for apk in apkList:
                 start_avd= 'emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
                 cmd = "python AndroLeakPR.py "+nomeemulatorecurr+" "+event+" "+str(number)+" "+str(t)+" "+apk+" "+str(len(apkList)) #root progetto
                 delete_avd = 'echo no | avdmanager delete avd --force -n {}'.format(nomeemulatorecurr) #directory in cui sono installati gli sdk ed i loro strumenti
+                os.system('ls')
+                os.system('pwd')
+                os.system('echo $PATH')
                 os.system(create_avd)
                 os.system(start_avd)
                 os.system(cmd)
