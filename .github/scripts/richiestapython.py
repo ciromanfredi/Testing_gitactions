@@ -2,11 +2,15 @@ import requests
 import sys
 def main(argv):
     for i in range(5,17):
-        if argv[i]<1 or argv[i]>15 or not argv[i].isnumeric():
+        print(i)
+        print(argv[i])
+        if int(argv[i])<1 or int(argv[i])>15 or not argv[i].isnumeric():
             argv[i]=1
+        argv[i]=int(argv[i])
 
-    if argv[4]<25 or argv[4]>29:
+    if int(argv[4])<25 or int(argv[4])>29:
         argv[4]=27
+    argv[4]=int(argv[4])
 
     data=dict(
                 radio_api=argv[4],
@@ -34,19 +38,21 @@ def main(argv):
             elif i==19:
                 data["Stai_Checkbox"]="stai"
 
+    files=dict(myFile0=open(argv[3], 'rb'),
+                                            myFile1="",
+                                            myFile2="",
+                                            myFile3=""
+                                        )
+
     response = requests.post(argv[1], 
                             data=data,
-                            files=dict(
-                                        myFile0=open(argv[3], 'r'),
-                                        myFile1="",
-                                        myFile2="",
-                                        myFile3=""
-                                    ),
+                            files=files,
                             verify=False
-        )
+                            )
     print(response.status_code)
     from pprint import pprint
     print(response.text)
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   print(sys.argv)
+   main(sys.argv)

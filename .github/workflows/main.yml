@@ -203,6 +203,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests
+          pip install pyOpenSSL
 
       - name: Autorizzo Gradle
         run: chmod u+x ./gradlew
@@ -212,7 +213,6 @@ jobs:
           echo "Costruisco apk."
           ./gradlew assembleDebug
           python .github/scripts/richiestapython.py "https://143.225.229.45:443/start" "ciro__napoli@hotmail.it" "app/build/outputs/apk/debug/app-debug.apk" 29 1 1 1 1 1 1 1 1 1 1 1 1 si si si
-
 
   LintTest:
     runs-on: macos
