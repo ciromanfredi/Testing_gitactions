@@ -49,4 +49,4 @@ def main(argv):
     print(response.text)
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+   main(argv[1:])
