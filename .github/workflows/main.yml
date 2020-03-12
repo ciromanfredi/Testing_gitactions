@@ -225,3 +225,17 @@ jobs:
       with:
         name: Risultati Lint Test
         path: risultatiLintTest
+
+  UnitTest:
+    runs-on: macos
+    steps:
+
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Autorizzo Gradle
+        run: chmod u+x ./gradlew
+
+      - name: Eseguo Lint Test
+        run: |
+          ./gradlew test
