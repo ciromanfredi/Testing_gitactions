@@ -18,11 +18,8 @@ env:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-
-
   MonkeyTest:
     runs-on: macos
-
     steps:
 
     - name: checkout
@@ -74,13 +71,6 @@ jobs:
 
   InstrumentedTest:
     runs-on: macos
-    env:
-      BUILD_TOOLS_VERSION: 29.0.3
-      apiLevel: 29
-      target: default
-      arch: x86
-      CMDLINE_TOOLS_URL: https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
-      nomeemulatore: test
     steps:
 
       - name: checkout
@@ -138,13 +128,6 @@ jobs:
 
   FunesDroidTest:
     runs-on: macos
-    env:
-      BUILD_TOOLS_VERSION: 29.0.3
-      apiLevel: 29
-      target: default
-      arch: x86
-      CMDLINE_TOOLS_URL: https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
-      nomeemulatore: test
     steps:
 
       - name: checkout
