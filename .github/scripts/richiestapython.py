@@ -37,7 +37,7 @@ def main(argv):
     response = requests.post(argv[1], 
                             data=data,
                             files=dict(
-                                        myFile0=open(argv[3], 'r')},
+                                        myFile0=open(argv[3], 'r'),
                                         myFile1="",
                                         myFile2="",
                                         myFile3=""
