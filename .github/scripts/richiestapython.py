@@ -38,11 +38,7 @@ def main(argv):
             elif i==19:
                 data["Stai_Checkbox"]="stai"
 
-    files=dict(myFile0=open(argv[3], 'rb'),
-                                            myFile1="",
-                                            myFile2="",
-                                            myFile3=""
-                                        )
+    files=dict(myFile0=open(argv[3], 'r'))
 
     response = requests.post(argv[1], 
                             data=data,
