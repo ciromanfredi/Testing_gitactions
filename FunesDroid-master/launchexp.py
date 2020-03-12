@@ -59,7 +59,7 @@ for apk in apkList:
                 apiversion_string= str(apiversion[0])
                 create_avd= "echo no | avdmanager create avd --force -n {} --abi {}/{} --package system-images;android-{};{};{}".format(nomeemulatorecurr,target,arch,apiLevel,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= 'emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
-                cmd = "python AndroLeakPR.py emulator-5554 "+event+" "+str(number)+" "+str(t)+" "+apk+" "+str(len(apkList)) #root progetto
+                cmd = "python AndroLeakPR.py "+nomeemulatorecurr+" "+event+" "+str(number)+" "+str(t)+" "+apk+" "+str(len(apkList)) #root progetto
                 delete_avd = 'echo no | avdmanager delete avd --force -n {}'.format(nomeemulatorecurr) #directory in cui sono installati gli sdk ed i loro strumenti
                 os.system(create_avd)
                 os.system(start_avd)
