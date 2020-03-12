@@ -36,7 +36,7 @@ def main(argv):
             elif i==19:
                 data["Stai_Checkbox"]="stai"
 
-    files=dict(myFile0=("app-debug.apk",open(argv[3], 'r')))
+    files={'myFile0':("app-debug.apk",open(argv[3], 'rb'))}
 
     response = requests.post(argv[1], 
                             data=data,
