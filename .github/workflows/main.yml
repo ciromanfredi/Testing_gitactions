@@ -202,7 +202,7 @@ jobs:
       - name: Autorizzo Gradle
         run: chmod u+x ./gradlew
 
-      - name: Eseguo FunesDroid Test
+      - name: Eseguo FunesDroid Test Richiesta
         run: |
           echo "Costruisco apk."
           ./gradlew assembleDebug
