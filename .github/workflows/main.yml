@@ -283,10 +283,12 @@ jobs:
           sdkmanager --install emulator > /dev/null
           echo "Installing system images"
           sdkmanager --install 'system-images;android-'${apiLevel}';'${target}';'${arch} > /dev/null
-          export PATH=${ANDROID_HOME}/tools/bin:$PATH
+
 
       - name: Autorizzo Gradle
-        run: chmod u+x ./gradlew
+        run: |
+          export PATH=${ANDROID_HOME}/tools/bin:$PATH
+          chmod u+x ./gradlew
 
       - name: Eseguo FunesDroid Test
         run: |
