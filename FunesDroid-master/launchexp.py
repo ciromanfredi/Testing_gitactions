@@ -47,15 +47,12 @@ nomeemulatore="emulatore"
 target="default"
 arch="x86"
 
-i=0
 for apk in apkList:
     for t in wtime:
         for event in les:
             for number in nevent:
-                i=i+1
-                nomeemulatorecurr="{} {}".format(nomeemulatore,i)
                 print('Starting new experiment, event: '+event+', number of les:' +str(number))
-                emulator= "em"+datetime.now().strftime('%Y%m%d%H%M%S')
+                nomeemulatorecurr= "em"+datetime.now().strftime('%Y%m%d%H%M%S')
                 apiversion_string= str(apiversion[0])
                 create_avd= "echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager create avd --force -n {} --abi {}/{} --package 'system-images;android-{};{};{}'".format(nomeemulatorecurr,target,arch,apiversion,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= '/Users/runner/Library/Android/sdk/emulator/emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
