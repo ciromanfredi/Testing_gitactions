@@ -39,15 +39,19 @@ def rebootEmulator():
 #Function that wait that the Emulator has booted.
 def waitDeviceHasBooted():
     maxiter=1000; count=0;
-    result=os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
+    result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
+    resultr=result.read()
     os.system('echo '+DEVICE)
-    while("1" not in result):
+    while("1" not in resultr):
+        result.close()
         os.system('echo '+result)
         print("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
-        result=os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
+        result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
+        resultr=result.read()
         print("Waiting the Emulator")
         time.sleep(2)
         count+=1;
+        result.close()
         if(count==maxiter): #If maxites is reached probably the emulator is crashed.
             print("ERROR: The emulator is offline.")
             raise SystemExit(0);
@@ -114,7 +118,7 @@ print("---------------------------------------------------------")
 
 #Installa l'apk STAI sul dispositivo (utile per sollecitare l'evento STAI)
 if(stimulus_type=="stai" or stimulus_type=="3"):
-    call(['adb','-s',DEVICE,'install','-g','-l','Utils/stai.apk'])
+    call(['adb','-s',DEVICE,'install','-g','-l','Utils/stai.apk']).
 
 # Setting device's date and time MMDDhhmm[[CC]YY][.ss]
 device_time = time.strftime("%d/%m/%Y "+"%I:%M:%S")
