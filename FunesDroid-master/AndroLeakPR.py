@@ -41,13 +41,11 @@ def waitDeviceHasBooted():
     maxiter=1000; count=0;
     result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
     while("1" not in result):
-        result.close()
         print("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
         result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
         print("Waiting the Emulator")
         time.sleep(2)
         count+=1;
-        result.close()
         if(count==maxiter): #If maxites is reached probably the emulator is crashed.
             print("ERROR: The emulator is offline.")
             raise SystemExit(0);
