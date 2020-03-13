@@ -290,8 +290,6 @@ jobs:
 
       - name: Creo APK
         run: |
-          ./gradlew cleanBuildCache
-          ./gradlew clean
           ./gradlew assembleDebug
 
       - name: Eseguo FunesDroid Test
