@@ -38,6 +38,7 @@ def rebootEmulator():
 
 #Function that wait that the Emulator has booted.
 def waitDeviceHasBooted():
+    print('waitDeviceHasBooted')
     maxiter=1000; count=0;
     result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
     while("1" not in result):
