@@ -44,10 +44,10 @@ def waitDeviceHasBooted():
     os.system('echo '+DEVICE)
     while("1" not in resultr):
         result.close()
-        os.system('echo '+result)
         print("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
         result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
         resultr=result.read()
+        os.system('echo '+resultr)
         print("Waiting the Emulator")
         time.sleep(2)
         count+=1;
