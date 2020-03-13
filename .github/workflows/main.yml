@@ -289,14 +289,20 @@ jobs:
         run: chmod u+x ./gradlew
 
       - name: Creo APK
-        run: |
-          ./gradlew assembleDebug
+        run: ./gradlew assembleDebug
 
-      - name: Eseguo FunesDroid Test
+      - name: Operazioni preliminari FunesDroid Test
+        run: |
+          mkdir -p FunesDroid-master/InputAPKs
+          mkdir -p FunesDroid-master/Results
+          mv app/build/outputs/apk/debug/app-debug.apk FunesDroid-master/InputAPKs
+          cd FunesDroid-master/
+
+#python launchexp.py -les [doc|bf|stai] -nevent [n] -wtime [w] -api [a]
+      - name: Operazioni preliminari FunesDroid Test
         run: |
           echo "Eseguo FunesDroid Test."
-          chmod u+x .github/scripts/funesdroid.sh
-          .github/scripts/funesdroid.sh
+          python launchexp.py --les 'doc' --nevent 1 --wtime 1 --apiversion 29
 
       - name: Risultati FunesDroid
         uses: actions/upload-artifact@v1
