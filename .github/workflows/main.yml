@@ -290,10 +290,10 @@ jobs:
           export PATH=${ANDROID_HOME}/tools/bin:$PATH
           chmod u+x ./gradlew
 
+#          ./gradlew assembleDebug
       - name: Eseguo FunesDroid Test
         run: |
           echo "Costruisco apk."
-          ./gradlew assembleDebug
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
