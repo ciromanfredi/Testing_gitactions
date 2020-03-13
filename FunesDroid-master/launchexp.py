@@ -46,6 +46,8 @@ apkList= os.listdir('InputAPKs')
 target="default"
 arch="x86"
 
+os.system('/Users/runner/Library/Android/sdk/tools/bin/sdkmanager --licenses')
+
 for apk in apkList:
     for t in wtime:
         for event in les:
@@ -56,8 +58,6 @@ for apk in apkList:
                 #os.system('echo $ANDROID_AVD_HOME')
                 #os.system('echo $ANDROID_SDK_HOME')
                 #os.system('echo $HOME')
-                os.system('/Users/runner/Library/Android/sdk/tools/bin/sdkmanager --licenses')
-                temp='"system-images;android-{};{};{}"'.format(apiversion_string,target,arch)
                 #os.system('echo '+temp)
                 create_avd= 'echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager -v create avd --force -n {} --abi {}/{} --package "system-images;android-{};{};{}"'.format(nomeemulatorecurr,target,arch,apiversion_string,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= '/Users/runner/Library/Android/sdk/emulator/emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim &'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
@@ -69,7 +69,6 @@ for apk in apkList:
                 os.system("/Users/runner/Library/Android/sdk/tools/bin/avdmanager -v list avd")
                 os.system(start_avd)
                 os.system(cmd)
-                print("QUAAA")
                 os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb devices")
                 os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s emulator-5554 emu kill")
                 os.system(delete_avd)

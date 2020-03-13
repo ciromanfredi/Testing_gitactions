@@ -67,7 +67,6 @@ if(len(li)==2):
     else:
         raise SyntaxError('You are using this command wrongly. Check the syntax (use the option help). ')
 elif(len(li)==7):
-    os.system('echo Ho prelevato l output')
     DEVICE = li[1]
     stimulus_type = li[2]
     num_rotations = int(li[3])	
