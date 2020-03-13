@@ -12,4 +12,4 @@ mkdir -p FunesDroid-master/Results
 mv app/build/outputs/apk/debug/app-debug.apk FunesDroid-master/InputAPKs
 cd FunesDroid-master/
 #python launchexp.py -les [doc|bf|stai] -nevent [n] -wtime [w] -api [a]
-python launchexp.py -les "doc" --nevent 1 --wtime 1 --apiversion 29
+python launchexp.py -les 'doc' --nevent 1 --wtime 1 --apiversion 29
