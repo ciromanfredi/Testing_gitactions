@@ -69,6 +69,7 @@ for apk in apkList:
                 os.system("/Users/runner/Library/Android/sdk/tools/bin/avdmanager -v list avd")
                 os.system(start_avd)
                 os.system(cmd)
+                print("QUAAA")
                 os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb devices")
                 os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+nomeemulatorecurr+" emu kill")
                 os.system(delete_avd)
