@@ -302,8 +302,7 @@ jobs:
       - name: Eseguo FunesDroid Test
         run: |
           echo "Eseguo FunesDroid Test."
-          chmod u+x ../.github/scripts/launchexp.py
-          python ../.github/scripts/launchexp.py --les 'doc' --nevent 1 --wtime 1 --apiversion 29
+          python launchexp.py --les 'doc' --nevent 1 --wtime 1 --apiversion ${apiLevel}
 
       - name: Risultati FunesDroid
         uses: actions/upload-artifact@v1
