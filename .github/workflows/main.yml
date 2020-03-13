@@ -290,7 +290,6 @@ jobs:
           export PATH=${ANDROID_HOME}/tools/bin:$PATH
           chmod u+x ./gradlew
 
-
       - name: Eseguo FunesDroid Test
         run: |
           echo "Costruisco apk."
