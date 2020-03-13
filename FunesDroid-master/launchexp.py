@@ -22,7 +22,7 @@ def get_args():
     parser.add_argument(
         '-w', '--wtime', type=int, help='wait time between events, default value: [1,2,10]', required=False, default=[1,2,10], nargs="+")
     parser.add_argument(
-        '-a', '--apiversion', type= int, help='api version needed for the emulator, default value: [25]', required= False, default=[25], nargs="+")
+        '-a', '--apiversion', type= int, help='api version needed for the emulator, default value: [25]', required= False, default=[29], nargs="+")
     # Array for all arguments passed to script
     args = parser.parse_args()
     # Assign args to variables
