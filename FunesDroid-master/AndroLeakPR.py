@@ -39,15 +39,11 @@ def rebootEmulator():
 #Function that wait that the Emulator has booted.
 def waitDeviceHasBooted():
     maxiter=1000; count=0;
-    result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
-    resultr=result.read()
-    os.system('echo '+DEVICE)
-    while("1" not in resultr):
+    result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
+    while("1" not in result):
         result.close()
         print("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
-        result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
-        resultr=result.read()
-        os.system('echo '+resultr)
+        result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
         print("Waiting the Emulator")
         time.sleep(2)
         count+=1;
@@ -57,9 +53,8 @@ def waitDeviceHasBooted():
             raise SystemExit(0);
 
 #Aspetto, eventualmente, che il device finisca il boot
-os.system('echo waitDeviceHasBooted')
 waitDeviceHasBooted()
-os.system('echo FINITO waitDeviceHasBooted')
+os.system('echo Device Avviato e pronto!')
 
 #Se la directory è vuota lancio un errore.
 if os.listdir("InputAPKs") == []: 
