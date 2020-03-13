@@ -289,7 +289,8 @@ jobs:
         run: chmod u+x ./gradlew
 
       - name: Creo APK
-        run: ./gradlew assembleDebug
+        run: |
+          ./gradlew assembleDebug
 
       - name: Eseguo FunesDroid Test
         run: |

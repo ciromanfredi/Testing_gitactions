@@ -12,8 +12,7 @@ print("Starting FunesDroid Testing...")
 def get_args():
     '''This function parses and return arguments passed in'''
     # Assign description to the help doc
-    parser = argparse.ArgumentParser(
-        description='Script that executes FunesDroid Testing')
+    parser = argparse.ArgumentParser(description='Script that executes FunesDroid Testing')
     # Add arguments
     parser.add_argument(
         '-l', '--les', type=str, help='events that have to be execute, default value: ["doc","bf","stai"]', required=False, default=["doc","bf","stai"], nargs="+")
@@ -22,7 +21,7 @@ def get_args():
     parser.add_argument(
         '-w', '--wtime', type=int, help='wait time between events, default value: [1,2,10]', required=False, default=[1,2,10], nargs="+")
     parser.add_argument(
-        '-a', '--apiversion', type= int, help='api version needed for the emulator, default value: [25]', required= False, default=[29], nargs="+")
+        '-a', '--apiversion', type=int, help='api version needed for the emulator, default value: [25]', required= False, default=[29], nargs="+")
     # Array for all arguments passed to script
     args = parser.parse_args()
     # Assign args to variables
@@ -39,6 +38,23 @@ les, nevent, wtime, apiversion = get_args()
 nevent=list(filter(lambda a: a != 0, nevent))
 wtime=list(filter(lambda a: a != 0, wtime))
 les = list(filter(lambda a: a !='',les))
+
+for event in nevent:
+    print(event)
+
+for time in wtime:
+    print(time)
+
+for l in les:
+    print(l)
+
+
+for t in wtime:
+    for event in les:
+        for number in nevent:
+            print(t," ",event," ",number)
+
+print(apiversion)
 
 os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb devices")
 apkList= os.listdir('InputAPKs')
