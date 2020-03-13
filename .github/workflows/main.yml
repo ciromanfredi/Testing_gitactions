@@ -290,7 +290,7 @@ jobs:
 
       - name: Creo APK
         run: |
-          ./gradlew lint
+          ./gradlew assembdkdmkdk
 
       - name: Eseguo FunesDroid Test
         run: |
