@@ -53,7 +53,7 @@ for apk in apkList:
                 print('Starting new experiment, event: '+event+', number of les:' +str(number))
                 nomeemulatorecurr= "em"+datetime.now().strftime('%Y%m%d%H%M%S')
                 apiversion_string= str(apiversion[0])
-                create_avd= "echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager create avd --force -n {} --abi {}/{} --package 'system-images;android-'{}';'{}';'{}'".format(nomeemulatorecurr,target,arch,apiversion_string,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
+                create_avd= "echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager create avd --force -n {} -V --abi {}/{} --package 'system-images;android-'{}';'{}';'{}'".format(nomeemulatorecurr,target,arch,apiversion_string,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= '/Users/runner/Library/Android/sdk/emulator/emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
                 os.system('"/Users/runner/Library/Android/sdk/platform-tools/adb start-server')
                 cmd = "python AndroLeakPR.py "+nomeemulatorecurr+" "+event+" "+str(number)+" "+str(t)+" "+apk+" "+str(len(apkList)) #root progetto
