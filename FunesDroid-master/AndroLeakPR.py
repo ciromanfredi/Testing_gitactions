@@ -38,15 +38,13 @@ def rebootEmulator():
 
 #Function that wait that the Emulator has booted.
 def waitDeviceHasBooted():
-    os.system('/Users/runner/Library/Android/sdk/platform-tools/adb kill-server')
-    os.system('/Users/runner/Library/Android/sdk/platform-tools/adb start-server')
     maxiter=1000; count=0;
-    result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
+    result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
     os.system('echo '+DEVICE)
-    while("1" not in result.read()):
+    while("1" not in result):
         os.system('echo '+result)
         print("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
-        result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
+        result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb shell getprop sys.boot_completed").read()
         print("Waiting the Emulator")
         time.sleep(2)
         count+=1;
