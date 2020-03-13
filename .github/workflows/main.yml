@@ -251,7 +251,7 @@ jobs:
 #      - name: Autorizzo Gradle
 #        run: chmod u+x ./gradlew
 #
-#      - name: Eseguo Lint Test
+#      - name: Eseguo Unit Test
 #        run: |
 #          ./gradlew test
 
@@ -290,7 +290,7 @@ jobs:
 
       - name: Creo APK
         run: |
-          ./gradlew assembleDebug
+          ./gradlew lint
 
       - name: Eseguo FunesDroid Test
         run: |
