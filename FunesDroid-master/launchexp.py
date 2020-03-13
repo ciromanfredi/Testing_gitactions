@@ -39,22 +39,22 @@ nevent=list(filter(lambda a: a != 0, nevent))
 wtime=list(filter(lambda a: a != 0, wtime))
 les = list(filter(lambda a: a !='',les))
 
-for event in nevent:
-    print(event)
+#for event in nevent:
+#    print(event)
 
-for time in wtime:
-    print(time)
+#for time in wtime:
+#    print(time)
 
-for l in les:
-    print(l)
+#for l in les:
+#    print(l)
 
 
-for t in wtime:
-    for event in les:
-        for number in nevent:
-            print(t," ",event," ",number)
+#for t in wtime:
+#    for event in les:
+#        for number in nevent:
+#            print(t," ",event," ",number)
 
-print(apiversion)
+#print(apiversion)
 
 os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb devices")
 apkList= os.listdir('InputAPKs')
