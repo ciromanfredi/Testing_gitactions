@@ -302,7 +302,8 @@ jobs:
       - name: Operazioni preliminari FunesDroid Test
         run: |
           echo "Eseguo FunesDroid Test."
-          python launchexp.py --les 'doc' --nevent 1 --wtime 1 --apiversion 29
+          chmod u+x .github/scripts/launchexp.py
+          python .github/scripts/launchexp.py --les 'doc' --nevent 1 --wtime 1 --apiversion 29
 
       - name: Risultati FunesDroid
         uses: actions/upload-artifact@v1
