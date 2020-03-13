@@ -57,6 +57,8 @@ for apk in apkList:
                 os.system('echo $ANDROID_SDK_HOME')
                 os.system('echo $HOME')
                 os.system('/Users/runner/Library/Android/sdk/tools/bin/sdkmanager --licenses')
+                temp='"system-images;android-{};{};{}"'.format(target,target,arch)
+                os.system('echo '+temp)
                 create_avd= 'echo no | /Users/runner/Library/Android/sdk/tools/bin/avdmanager -v create avd --force -n {} --abi {}/{} --package "system-images;android-{};{};{}"'.format(nomeemulatorecurr,target,arch,apiversion_string,target,target,arch) #directory in cui sono installati gli sdk ed i loro strumenti
                 start_avd= '/Users/runner/Library/Android/sdk/emulator/emulator -avd {} -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim'.format(nomeemulatorecurr) #directory in SDK contenente l'eseguibile dell'emulatore
                 os.system('"/Users/runner/Library/Android/sdk/platform-tools/adb start-server')
