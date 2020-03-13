@@ -6,7 +6,7 @@ name: Progetto IS2 workflow
 # events but only for the master branch
 on:
   push:
-    branches: [ master_3 ]
+    branches: [ master ]
 
 env:
   BUILD_TOOLS_VERSION: 29.0.3
@@ -186,7 +186,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: Risultati FunesDroid
-          path: Results
+          path: FunesDroid-master/Results
 
   FunesDroidTestInvioRichiesta:
     runs-on: macos
