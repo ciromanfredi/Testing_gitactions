@@ -90,10 +90,11 @@ shutil.copy(ManifestRelativePath+'/AndroidManifest.xml', my_path+'/')
 
 #Installa l'apk sul dispositivo
 print("Installing apk " + apk_name)
-call(['adb','-s',DEVICE,'install','-g','-l',apk_name])
+#call(['adb','-s',DEVICE,'install','-g','-l',apk_name])
+os.system('/Users/runner/Library/Android/sdk/platform-tools/adb -s '+DEVICE+' install '+apk_name)
 
 #Disabilita accellerometro su dispositivo
-os.system("adb -s "+DEVICE+" shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0")
 
 #Lista tutte le activity e salva il risultato in un file temporaneo,
 #effettuando il parsing dell'AndroidManifest.xml.
@@ -101,7 +102,7 @@ print("Parsing AndroidManifest.xml")
 results = os.system("java -jar Utils/ManifestParser.jar AndroidManifest.xml > tmpFile")
 
 #Pongo adb in root state
-os.system("adb -s "+DEVICE+" root")
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" root")
 
 # Recupera le attività ed il package dal file temporaneo
 f = open("tmpFile")
@@ -119,8 +120,8 @@ print("App Package: " + package)
 
 #Torno in home e resetto (occorre iniziare gli esperimenti dalla Home).
 print("App resetting")
-os.system("adb -s "+DEVICE+" shell am force-stop "+package)
-os.system("adb -s "+DEVICE+" shell input keyevent KEYCODE_HOME")
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am force-stop "+package)
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell input keyevent KEYCODE_HOME")
 
 # ESPERIMENTI
 print("Starting experiments")
@@ -132,7 +133,7 @@ dump_log = [] # Preparo il log dei dump
 cpu_usage_log = [] # Preparo il log relativo all'utilizzo della cpu
 logcat_starttime = time.strftime("%m-%d "+"%H:%M:%S")+".00" # Utile per il comando logcat
 StartingExperimentsTime = time.strftime("%d/%m/%Y "+"%I:%M:%S")
-cmd = "adb -s "+DEVICE+" logcat"
+cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" logcat"
 logcat_popen = subprocess.Popen(cmd,stdout=open("logcat.txt", 'w'),shell=True) #Avvio il logcat
 num_activities = len(activities)
 num_crashed_activities = 0
@@ -165,15 +166,15 @@ try:
 
          #Torno in home e resetto
          print("App resetting")
-         os.system("adb -s "+DEVICE+" shell am force-stop "+package)
+         os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am force-stop "+package)
          
          #Lancio l'activity
          print("Launching activity "+a)
-         os.system("adb -s "+DEVICE+" shell am start -n "+a)
-         os.system("adb -s "+DEVICE+" shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0")
+         os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am start -n "+a)
+         os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0")
 
          #Salvo un riferimento all'activity corrente
-         cmd = "adb -s "+DEVICE+" shell \" dumpsys activity | grep top-activity\""
+         cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell \" dumpsys activity | grep top-activity\""
          launched_activity = os.popen(cmd).read()
          time.sleep(LONG_WAIT_TIME)
 
@@ -196,10 +197,10 @@ try:
 
          #Effettuo un Dump della memoria heap dell'app
          print("Dumping heap (Before)")
-         cmd = "adb -s "+DEVICE+" shell am dumpheap "+package+" /data/local/tmp/"+package+"_before_"+a_name+".hprof"
+         cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am dumpheap "+package+" /data/local/tmp/"+package+"_before_"+a_name+".hprof"
          result = os.popen(cmd).read()
          time.sleep(WAIT_TIME)
-         cmd = "adb -s "+DEVICE+" pull /data/local/tmp/"+package+"_before_"+a_name+".hprof " + destination_path
+         cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" pull /data/local/tmp/"+package+"_before_"+a_name+".hprof " + destination_path
          result = os.popen(cmd).read()
          dump_log.append("----- "+a_name+" -----\n")
          dump_log.append(datetime.now().strftime("%H:%M:%S.%f")+" Dump Heap (Before).\n")
@@ -215,7 +216,7 @@ try:
              # Se lo stimolo ha causato un errore torno in home
              if(error_check(launched_activity,package,a_name)=="true"):
                  print("Error. The current activity is not the launched one. Returning in home.")
-                 os.system("adb -s "+DEVICE+" shell input keyevent KEYCODE_HOME")
+                 os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell input keyevent KEYCODE_HOME")
                  break
             # Se ho raggiunto il numero now_dump effettuo un dump della memoria, e genero i CSV con andromat. 
              elif(dump_count==now_dump):
@@ -235,17 +236,17 @@ try:
          #Effettuo un dump post garbage-collector finale
          garbage_collector(gc_log,package)
          print("Dumping heap (After Garbage Collection)")
-         cmd = "adb -s "+DEVICE+" shell am dumpheap "+package+" /data/local/tmp/"+package+"_afterGC_"+a_name+".hprof"
+         cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am dumpheap "+package+" /data/local/tmp/"+package+"_afterGC_"+a_name+".hprof"
          result = os.popen(cmd).read()
          time.sleep(WAIT_TIME)
-         cmd = "adb -s "+DEVICE+" pull /data/local/tmp/"+package+"_afterGC_"+a_name+".hprof " + destination_path
+         cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" pull /data/local/tmp/"+package+"_afterGC_"+a_name+".hprof " + destination_path
          result = os.popen(cmd).read()
          dump_log.append(datetime.now().strftime("%H:%M:%S.%f")+" Dump Heap (After GC).\n")
          time.sleep(WAIT_TIME)
          convert_hprof(destination_path+"/"+package+"_afterGC_"+a_name)
 
          #Cancello i file hprof dalla memoria del dispositivo
-         cmd = "adb -s "+DEVICE+" shell rm -r /data/local/tmp/"+package+"_before_"+a_name+".hprof"
+         cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell rm -r /data/local/tmp/"+package+"_before_"+a_name+".hprof"
          os.system(cmd)
 
          #Calcolo l'istogramma differenza dei dump con HprofAnalyzer.jar
@@ -266,7 +267,7 @@ try:
          else:
              # Se non ci sono stati errori:
              log_error(log,a_name,'false',"") # Registro che non ci sono stati errori. 
-             os.system("adb -s "+DEVICE+" shell am force-stop "+package) # Chiudo l'applicazione per pulire la memoria.
+             os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am force-stop "+package) # Chiudo l'applicazione per pulire la memoria.
 
          #Printing Progress
          print("Progress on "+apk_name+": "+str(count)+" activities of "+str(num_activities)+" completed. ")
@@ -279,8 +280,8 @@ logcat_popen.terminate() # Chiudo il logcat
 
 #Torno in home e resetto
 print("App resetting")
-os.system("adb -s "+DEVICE+" shell am force-stop "+package)
-os.system("adb -s "+DEVICE+" shell pm clear "+package)
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell am force-stop "+package)
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell pm clear "+package)
 
 #Controllo se la directory esiste. 
 if not os.path.exists("Results/"+package+"/"):
@@ -294,7 +295,7 @@ get_gc_logs("logcat.txt",gc_log_2) # Recupero i log di interesse (relativi al GC
 
 #Cancello il contenuto della cartella temporanea del device
 print("Deleting tempopary files on "+DEVICE)
-cmd = "adb -s "+DEVICE+" shell \"rm -f -r data/local/tmp/* \""
+cmd = "/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell \"rm -f -r data/local/tmp/* \""
 result = os.popen(cmd).read()
 
 #Recupero i log di trace.txt
@@ -355,8 +356,8 @@ makeAndroLeakReportPizzataRusso("AndroidLeakReport",str(apk_name),str(stimulus_t
 
 #Riavvio di ADB
 print("Restarting ADB service")
-os.system("adb kill-server")
-os.system("adb start-server")
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb kill-server")
+os.system("/Users/runner/Library/Android/sdk/platform-tools/adb start-server")
 
 #Cancello i file temporanei creati dallo script.
 try:
