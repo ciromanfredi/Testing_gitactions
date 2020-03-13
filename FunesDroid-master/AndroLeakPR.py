@@ -118,7 +118,7 @@ print("---------------------------------------------------------")
 
 #Installa l'apk STAI sul dispositivo (utile per sollecitare l'evento STAI)
 if(stimulus_type=="stai" or stimulus_type=="3"):
-    call(['adb','-s',DEVICE,'install','-g','-l','Utils/stai.apk']).
+    call(['adb','-s',DEVICE,'install','-g','-l','Utils/stai.apk'])
 
 # Setting device's date and time MMDDhhmm[[CC]YY][.ss]
 device_time = time.strftime("%d/%m/%Y "+"%I:%M:%S")
