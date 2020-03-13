@@ -296,12 +296,12 @@ jobs:
           mkdir -p FunesDroid-master/InputAPKs
           mkdir -p FunesDroid-master/Results
           mv app/build/outputs/apk/debug/app-debug.apk FunesDroid-master/InputAPKs
-          cd FunesDroid-master/
 
 #python launchexp.py -les [doc|bf|stai] -nevent [n] -wtime [w] -api [a]
       - name: Eseguo FunesDroid Test
         run: |
           echo "Eseguo FunesDroid Test."
+          cd FunesDroid-master/
           python launchexp.py --les 'doc' --nevent 1 --wtime 1 --apiversion ${apiLevel}
 
       - name: Risultati FunesDroid
