@@ -285,11 +285,11 @@ jobs:
           sdkmanager --install 'system-images;android-'${apiLevel}';'${target}';'${arch} > /dev/null
           export PATH=${ANDROID_HOME}/tools/bin:$PATH
 
-      - name: Autorizzo Gradle & Creo APK
-        run: |
-          echo "Costruisco apk."
-          chmod u+x ./gradlew
-          ./gradlew assembleDebug
+      - name: Autorizzo Gradle
+        run: chmod u+x ./gradlew
+
+      - name: Creo APK
+        run: ./gradlew assembleDebug
 
       - name: Eseguo FunesDroid Test
         run: |
