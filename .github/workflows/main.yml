@@ -287,13 +287,13 @@ jobs:
 
       - name: Autorizzo Gradle & Creo APK
         run: |
+          echo "Costruisco apk."
           chmod u+x ./gradlew
           ./gradlew assembleDebug
 
       - name: Eseguo FunesDroid Test
         run: |
-          echo "Costruisco apk."
-
+          echo "Eseguo FunesDroid Test."
           chmod u+x .github/scripts/funesdroid.sh
           .github/scripts/funesdroid.sh
 
