@@ -38,9 +38,9 @@ def rebootEmulator():
 
 #Function that wait that the Emulator has booted.
 def waitDeviceHasBooted():
-    os.system('echo waitDeviceHasBooted')
     maxiter=1000; count=0;
     result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
+    os.system('echo '+DEVICE)
     while("1" not in result):
         print("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed")
         result=os.popen("/Users/runner/Library/Android/sdk/platform-tools/adb -s "+DEVICE+" shell getprop sys.boot_completed").read()
@@ -77,8 +77,9 @@ else:
     raise SyntaxError(str(len(li))+' You are using this command wrongly. Check the syntax (use the option help). ')
 
 #Aspetto, eventualmente, che il device finisca il boot
+os.system('echo waitDeviceHasBooted')
 waitDeviceHasBooted()
-
+os.system('echo FINITO waitDeviceHasBooted')
 
 # Input Validation.
 if(sample_size>10000 or sample_size <=0):
