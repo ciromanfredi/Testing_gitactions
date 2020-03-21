@@ -2,9 +2,12 @@ import requests
 import sys
 def main(argv):
     for i in range(5,17):
-        if int(argv[i])<0 or int(argv[i])>15 or not argv[i].isnumeric():
+        try:
+            argv[i]=int(argv[i])
+        except Exception:
             argv[i]=0
-        argv[i]=int(argv[i])
+        if argv[i]<0 or argv[i]>15:
+            argv[i]=0
 
     if int(argv[4])<25 or int(argv[4])>29:
         argv[4]=27
